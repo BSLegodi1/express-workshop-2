@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const exphbs = require("express-handlebars")
 const fs = require("fs")
+const readPosts = require("./helpers/readPosts.js")
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
@@ -45,6 +46,11 @@ app.get('/contact', function (req, res) {
     });
 });
 
+app.get('/api/post', function (req, res) {
+  readPosts(function(error,post) {
+    res.json(post);
+  });
+});
 
 
 
